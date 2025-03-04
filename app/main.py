@@ -16,9 +16,8 @@ def main():
 
     csv_path = "./app/data//user_transactions.csv"
     output_file = "./app/data/output.csv"
-    report_file = "./app/data/report.csv"
+    report_file = "./app/data/report.json"
 
-    # Rule based fraud detection
     rule_based_fraud_monitoring_service = get_rule_based_fraud_monitoring_service()
     rule_based_fraud_monitoring_service.analyze_data(csv_path, output_file, report_file)
     suspicious = rule_based_fraud_monitoring_service.get_suspicious_transactions()
