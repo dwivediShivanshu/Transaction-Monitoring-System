@@ -9,7 +9,7 @@ router = APIRouter()
 async def test_route():
     return "Hello World"
 
-@router.post("/initialize")
+@router.post("/generate-report")
 async def generate_report(
     fraud_detection_service: FraudDetectionService = Depends(get_fraud_detection_service),
     runtime_rules: List[Rule] = Depends(get_runtime_rules)

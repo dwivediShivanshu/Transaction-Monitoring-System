@@ -55,7 +55,7 @@ poetry run python app/main.py
 
 ## Usage
 **Generate report**
-curl -X POST "http://localhost:8000/initialize"
+curl -X POST "http://localhost:8000/generate-report"
 
 **Detect fraud**
 curl -X POST "http://localhost:8000/fraud-check" -H "Content-Type: application/json" -d '{"user_id": 1, "timestamp": "2025-02-23 22:23:38.038839", "merchant_name": "Starbucks", "amount": 1000}'
