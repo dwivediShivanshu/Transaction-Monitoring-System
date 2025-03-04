@@ -159,10 +159,8 @@ class RuleBasedFraudMonitoringService:
             return False
             
         try:
-            # Get suspicious transactions
             suspicious = self.transactions[self.transactions['is_suspicious']]
             
-            # Calculate statistics
             rule_counts = {}
             for reason_str in suspicious['flag_reasons'].dropna():
                 reasons = reason_str.split('; ')
@@ -170,11 +168,9 @@ class RuleBasedFraudMonitoringService:
                     rule_type = reason.split(':')[0].strip()
                     rule_counts[rule_type] = rule_counts.get(rule_type, 0) + 1
             
-            # User statistics
             total_users = self.transactions['userId'].nunique()
             users_with_flags = suspicious['userId'].nunique()
             
-            # Prepare summary report
             summary = {
                 "total_transactions": len(self.transactions),
                 "suspicious_transactions": len(suspicious),

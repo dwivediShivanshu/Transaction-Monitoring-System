@@ -28,8 +28,8 @@ async def generate_report(
     
     return "Report generated successfully."
 
-@router.post("/detect-fraud")
-async def detect_fraud(transaction: Transaction,
+@router.post("/fraud-check")
+async def fraud_check(transaction: Transaction,
                        fraud_detection_service: FraudDetectionService = Depends(get_fraud_detection_service),
                        runtime_rules: List[Rule] = Depends(get_runtime_rules)):
     return fraud_detection_service.detect_fraud(transaction, runtime_rules)
