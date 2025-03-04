@@ -40,7 +40,7 @@ This system analyzes transaction data to detect potentially fraudulent activitie
 **Why**: If a user typically spends a small amount at a particular merchant but suddenly makes a large purchase, it could indicate potential fraud. Fraudsters often make larger purchases at familiar merchants to avoid detection, especially if they have compromised a legitimate user's account. For example, if a user typically spends $10 at Starbucks for a morning coffee but suddenly makes a $1000 purchase, it could indicate potential fraud.
 
 
-## Usage
+## Installation
 **Install poetry**
 curl -sSL https://install.python-poetry.org | python3 -
 
@@ -52,6 +52,25 @@ poetry lock & poetry install
 
 **Run the application**
 poetry run python app/main.py
+
+## Usage
+**Generate report**
+curl -X POST "http://localhost:8000/initialize"
+
+**Detect fraud**
+curl -X POST "http://localhost:8000/detect-fraud" -H "Content-Type: application/json" -d '{"user_id": 1, "timestamp": "2025-02-23 22:23:38.038839", "merchant_name": "Starbucks", "amount": 1000}'
+
+
+## Result
+Given the user transactions csv file, the application will generate a report.json file with the following information:
+- Total number of transactions
+- Total number of suspicious transactions
+- Total number of users with suspicious transactions
+- Total number of users with suspicious transactions percentage
+- Total number of users with suspicious transactions percentage
+- Total number of users with suspicious transactions percentage
+
+
 
 
 

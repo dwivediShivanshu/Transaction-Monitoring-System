@@ -7,7 +7,7 @@ import json
 from app.config import config
 from config import RuleConfig
 from protocol import Rule
-from app.models.transaction import Transaction, FraudDetectionResult
+from app.models.model import Transaction, FraudDetectionResult
 
 class RuleBasedFraudMonitoringService:
     """Service layer for monitoring and flagging suspicious transactions."""
@@ -87,6 +87,8 @@ class RuleBasedFraudMonitoringService:
                 'max_amount': user_txns['amount'].max(),
                 'transaction_count': len(user_txns)
             }
+        
+        print(self.user_profiles.keys())
             
     def run_all_rules(self, rules: List[Rule] = None) -> Dict[str, int]:
         """
@@ -209,11 +211,14 @@ class RuleBasedFraudMonitoringService:
 
         transactions: pd.DataFrame = pd.DataFrame({
             'userId': [transaction.user_id],
-            'timestamp': [transaction.timestamp],
+            'timestamp': [pd.to_datetime(transaction.timestamp)],
             'merchantName': [transaction.merchant_name],
-            'amount': [transaction.amount]
+            'amount': [transaction.amount],
+            "is_suspicious": [False],
+            "flag_reasons": [""]
         })
 
+        print(self.user_profiles.keys())
         if transaction.user_id not in self.user_profiles:
             return FraudDetectionResult(
                 is_fraud=False,

@@ -8,7 +8,7 @@ class Transaction(BaseModel):
     - merchant_name: Name of the merchant where the transaction occurred
     - amount: Amount of the transaction
     """
-    user_id: str
+    user_id: int
     timestamp: str
     merchant_name: str
     amount: float

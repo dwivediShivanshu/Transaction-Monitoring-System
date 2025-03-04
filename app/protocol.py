@@ -1,6 +1,6 @@
 from typing import Protocol, List
 import pandas as pd
-from app.models.transaction import Transaction, FraudDetectionResult
+from app.models.model import Transaction, FraudDetectionResult
 
 class Rule(Protocol):
     def apply(self, transactions: pd.DataFrame, user_profile: dict = None) -> int:

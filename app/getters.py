@@ -12,14 +12,14 @@ rules = [
         UnusualMerchantActivityRule()
     ]
 
-def get_rule_based_fraud_monitoring_service() -> RuleBasedFraudMonitoringService:
-    """Get the rule based fraud monitoring service."""
-    return RuleBasedFraudMonitoringService(config=config, rules=rules)
-
+fraud_detection_service = None
 
 def get_fraud_detection_service() -> FraudDetectionService:
     """Get the fraud detection service."""
-    return RuleBasedFraudMonitoringService(config=config, rules=rules)
+    global fraud_detection_service
+    if fraud_detection_service is None:
+        fraud_detection_service = RuleBasedFraudMonitoringService(config=config, rules=rules)
+    return fraud_detection_service
 
 def get_runtime_rules() -> List[Rule]:
     """Get the runtime rules."""
@@ -29,3 +29,7 @@ def get_runtime_rules() -> List[Rule]:
         TimeAnomalyRule(),
         UnusualMerchantActivityRule()
     ]
+
+def get_all_rules() -> List[Rule]:
+    """Get all rules."""
+    return rules
