@@ -48,8 +48,7 @@ curl -sSL https://install.python-poetry.org | python3 -
 poetry --version
 
 **Install dependencies**
-poetry lock
-poetry install
+poetry lock & poetry install
 
 **Run the application**
 poetry run python app/main.py
