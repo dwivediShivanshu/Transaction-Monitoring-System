@@ -10,7 +10,7 @@ class RuleConfig:
     
     # Merchant anomaly parameters
     merchant_anomaly_risk_threshold: float = 0.5
-    
+    unusual_merchant_activity_threshold: float = 2.5
     # Amount deviation parameters
     amount_deviation_std_threshold: float = 2.5
     

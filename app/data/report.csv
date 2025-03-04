@@ -1,12 +1,13 @@
 {
     "total_transactions": 10005,
-    "suspicious_transactions": 182,
-    "suspicious_percentage": 1.8190904547726137,
+    "suspicious_transactions": 183,
+    "suspicious_percentage": 1.8290854572713642,
     "total_users": 100,
     "users_with_flags": 86,
     "users_with_flags_percentage": 86.0,
     "rule_breakdown": {
         "Amount anomaly": 118,
+        "Unusual merchant activity": 86,
         "Merchant anomaly": 43,
         "Velocity": 21
     },
@@ -17,5 +18,5 @@
         "merchant_anomaly_risk_threshold": 0.5,
         "amount_deviation_std_threshold": 2.5
     },
-    "timestamp": "2025-03-03T20:16:38.493535"
+    "timestamp": "2025-03-03T20:45:34.426721"
 }

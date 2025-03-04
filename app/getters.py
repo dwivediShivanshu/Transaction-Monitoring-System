@@ -1,6 +1,6 @@
 from app.config import config
 from app.sevices.rule_based_detection import RuleBasedFraudMonitoringService
-from app.sevices.rules.rules import VelocityCheckRule, TimeAnomalyRule, MerchantAnomalyRule, AmountDeviationRule
+from app.sevices.rules.rules import VelocityCheckRule, TimeAnomalyRule, MerchantAnomalyRule, AmountDeviationRule, UnusualMerchantActivityRule
 from app.protocol import FraudDetectionService, Rule
 from typing import List
 
@@ -8,7 +8,8 @@ rules = [
         VelocityCheckRule(),
         TimeAnomalyRule(),
         MerchantAnomalyRule(),
-        AmountDeviationRule()
+        AmountDeviationRule(),
+        UnusualMerchantActivityRule()
     ]
 
 def get_rule_based_fraud_monitoring_service() -> RuleBasedFraudMonitoringService:
@@ -25,5 +26,6 @@ def get_runtime_rules() -> List[Rule]:
     return [
         AmountDeviationRule(),
         MerchantAnomalyRule(),
-        TimeAnomalyRule()
+        TimeAnomalyRule(),
+        UnusualMerchantActivityRule()
     ]

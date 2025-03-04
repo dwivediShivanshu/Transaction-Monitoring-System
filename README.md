@@ -34,13 +34,25 @@ This system analyzes transaction data to detect potentially fraudulent activitie
 
 **Why**: Unusually large transactions or a pattern of incrementally increasing transaction amounts can indicate fraud. Criminals often start with small "test" transactions before attempting larger ones.
 
-### 5. Geographically Impossible Transactions
-**Rule**: Flag transactions with the same user ID occurring in different physical locations within a timeframe that makes travel between them impossible
+### 5. Unusual Merchant Activity
+**Rule**: Flag transactions where a user has a sudden increase in spending at a specific merchant or category compared to their historical spending patterns.
 
-**Why**: If the transaction data includes or can be linked to location information, this rule can detect when the same card is used in geographically distant locations within an unreasonably short timeframe (e.g., transactions in New York and Los Angeles within 3 hours).
+**Why**: If a user typically spends a small amount at a particular merchant but suddenly makes a large purchase, it could indicate potential fraud. Fraudsters often make larger purchases at familiar merchants to avoid detection, especially if they have compromised a legitimate user's account. For example, if a user typically spends $10 at Starbucks for a morning coffee but suddenly makes a $1000 purchase, it could indicate potential fraud.
+
 
 ## Usage
-[Add usage instructions here]
+**Install poetry**
+curl -sSL https://install.python-poetry.org | python3 -
 
-## Installation
-[Add installation instructions here]
+**Verify poetry installation**
+poetry --version
+
+**Install dependencies**
+poetry lock
+poetry install
+
+**Run the application**
+poetry run python app/main.py
+
+
+

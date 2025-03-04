@@ -159,3 +159,46 @@ class AmountDeviationRule:
                     flagged_count += 1
         
         return flagged_count
+
+
+class UnusualMerchantActivityRule:
+    """
+    Rule 5: Flag transactions where a user has a sudden increase in spending at a specific merchant or category compared to their historical spending patterns.
+    """
+    def apply(self, transactions: pd.DataFrame, user_profiles: dict = None) -> int:
+        """
+            Args:
+                transactions: pd.DataFrame
+                user_profiles: dict
+            Returns:
+                int: Number of transactions flagged by this rule
+        """
+        flagged_count = 0
+        
+        for i, txn in transactions.iterrows():
+            userId = txn['userId']
+            merchant = txn['merchantName']
+            amount = txn['amount']
+            user_profile = user_profiles.get(userId)
+            
+            if not user_profile:
+                continue
+            
+            merchant_wise_amount_mean = user_profile['merchant_wise_amount_mean']
+            merchant_wise_amount_std = user_profile['merchant_wise_amount_std']
+            
+            if merchant not in merchant_wise_amount_mean:
+                continue
+            
+            historical_amount_mean = merchant_wise_amount_mean[merchant]
+            historical_amount_std = merchant_wise_amount_std[merchant]
+
+            if amount > historical_amount_mean + config.unusual_merchant_activity_threshold * historical_amount_std:
+                transactions.at[i, 'is_suspicious'] = True
+                reason = f"Unusual merchant activity: ${amount} at {merchant}"
+                if transactions.at[i, 'flag_reasons']:
+                    transactions.at[i, 'flag_reasons'] += "; " + reason
+                else:
+                    transactions.at[i, 'flag_reasons'] = reason
+                flagged_count += 1
+        return flagged_count

@@ -74,10 +74,13 @@ class RuleBasedFraudMonitoringService:
             common_merchants = {k: v for k, v in user_txns['merchantName'].value_counts().to_dict().items() if v >= 2}
             amount_mean = user_txns['amount'].mean()
             amount_std = user_txns['amount'].std() if len(user_txns) > 1 else amount_mean / 2
-            
+            merchant_wise_amount_mean = user_txns.groupby('merchantName')['amount'].mean().to_dict()
+            merchant_wise_amount_std = user_txns.groupby('merchantName')['amount'].std().to_dict()
             self.user_profiles[userId] = {
                 'active_hours': active_hours,
                 'common_merchants': common_merchants,
+                'merchant_wise_amount_mean': merchant_wise_amount_mean,
+                'merchant_wise_amount_std': merchant_wise_amount_std,
                 'amount_mean': amount_mean,
                 'amount_std': amount_std,
                 'min_amount': user_txns['amount'].min(),
