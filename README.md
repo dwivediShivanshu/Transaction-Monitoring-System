@@ -7,8 +7,8 @@ This system analyzes transaction data to detect potentially fraudulent activitie
 - Merchant Name
 - Amount
 
-## Input Requirements
-- CSV file format
+## Data
+- CSV file. Present in app/data/user_transactions.csv
 - Maximum 10,000 rows
 - Required columns: user_id, timestamp, merchant_name, amount
 
