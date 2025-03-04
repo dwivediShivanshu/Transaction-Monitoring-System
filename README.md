@@ -70,7 +70,26 @@ Given the user transactions csv file, the application will generate a report.jso
 - Total number of users with suspicious transactions percentage
 - Total number of users with suspicious transactions percentage
 
-
-
-
-
+```json
+{
+    "total_transactions": 10005,
+    "suspicious_transactions": 183,
+    "suspicious_percentage": 1.8290854572713642,
+    "total_users": 100,
+    "users_with_flags": 86,
+    "users_with_flags_percentage": 86.0,
+    "rule_breakdown": {
+        "Amount anomaly": 118,
+        "Unusual merchant activity": 86,
+        "Merchant anomaly": 43,
+        "Velocity": 21
+    },
+    "config": {
+        "velocity_window_minutes": 30,
+        "velocity_threshold_count": 3,
+        "time_anomaly_hour_tolerance": 3,
+        "merchant_anomaly_risk_threshold": 0.5,
+        "amount_deviation_std_threshold": 2.5
+    },
+    "timestamp": "2025-03-03T20:57:18.723267"
+}
